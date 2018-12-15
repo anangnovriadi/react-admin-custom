@@ -92,9 +92,15 @@ class Wrapper extends Component {
                                                     <td className="text-center">{key.Transaction.Total_prize}</td>
                                                     <td className="text-center">{key.Transaction.Status === '2' ? 'Sudah Konfirmasi' : 'Belum Konfirmasi'}</td>
                                                     <td className="text-center">
-                                                        <Link to={"/transaction-details/"+key.Receipt.ID}>
-                                                            <button style={{ cursor: 'pointer' }} className="btn btn-primary">Update</button>
-                                                        </Link>
+                                                        {
+                                                            key.Transaction.Status === '2' ? (
+                                                                ''
+                                                            ) : (
+                                                                <Link to={"/transaction-details/"+key.Receipt.ID}>
+                                                                    <button style={{ cursor: 'pointer' }} className="btn btn-primary">Update</button>
+                                                                </Link>
+                                                            )
+                                                        }
                                                     </td>
                                                 </tr>
                                             )
