@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import Sidebar from '../../layout/Sidebar';
+import axios from 'axios';
 
 class Wrapper extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            list: []
+        }
+    }
+
+    componentDidMount() {
+        axios.get('https://jsonplaceholder.typicode.com/todos/1')
+        .then((res) => {
+            console.log(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
     render() {
         return(
             <div>

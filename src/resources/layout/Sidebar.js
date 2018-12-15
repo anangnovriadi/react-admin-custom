@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Sidebar extends Component {
     constructor(props) {
@@ -14,18 +15,18 @@ class Sidebar extends Component {
                 <div className="sl-sideleft">
                     <label className="sidebar-label">Navigation</label>
                     <div className="sl-sideleft-menu">
-                        <a href="/" className={this.props.link === '/' ? 'sl-menu-link active' : 'sl-menu-link'}>
+                        <Link to="/" className={this.props.link === '/' ? 'sl-menu-link active' : 'sl-menu-link'}>
                             <div className="sl-menu-item">
                                 <i className="menu-item-icon icon ion-ios-home-outline tx-22"></i>
                                 <span className="menu-item-label">Dashboard</span>
                             </div>
-                        </a>
-                        <a href="/transaction" className={this.props.link === '/transaction' ? 'sl-menu-link active' : 'sl-menu-link'}>
+                        </Link>
+                        <Link to="/transaction" className={this.props.link === '/transaction' ? 'sl-menu-link active' : 'sl-menu-link'}>
                             <div className="sl-menu-item">
                                 <i className="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
                                 <span className="menu-item-label">Transaksi</span>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
