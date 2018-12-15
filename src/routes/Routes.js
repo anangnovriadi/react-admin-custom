@@ -17,8 +17,8 @@ class Routes extends Component {
                     <Header />
                     <div className="sl-mainpanel">
                         <Switch>
-                            <Route exact path="/" component={Dashboard} />
-                            <Route path="/transaction" component={Transaction} />
+                            {/* <Route exact path="/" component={Dashboard} /> */}
+                            <Route exact path="/" component={Transaction} />
                             <Route path="/must-be-paid" component={MustBePaid} />
                             <Route path="/transaction-details/:id" component={Details} />
                         </Switch>

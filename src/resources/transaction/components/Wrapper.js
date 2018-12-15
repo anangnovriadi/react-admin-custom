@@ -57,7 +57,7 @@ class Wrapper extends Component {
         const { onCloseModal, onOpenModal } = this;
         return(
             <div>
-                <Sidebar link="/transaction" />
+                <Sidebar link="/" />
                 <nav className="breadcrumb sl-breadcrumb">
                     <a className="breadcrumb-item" href="index.html">Starlight</a>
                     <span className="breadcrumb-item active">Transaction</span>

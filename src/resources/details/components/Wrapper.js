@@ -73,9 +73,10 @@ class Wrapper extends Component {
                                     return(
                                         <div key={i}>
                                             <img src={key.Receipt.Image} />
-                                            <ul>
+                                            <ul className="pt-4">
                                                 <li>{key.Receipt.AccountBankName}</li>
                                                 <li>{key.Receipt.BankName}</li>
+                                                <li>{key.Transaction.Total_prize}</li>
                                             </ul>
                                         </div>
                                     )
