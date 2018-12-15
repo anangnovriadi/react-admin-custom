@@ -5,6 +5,7 @@ import Header from '../resources/layout/Header';
 import Footer from '../resources/layout/Footer';
 import Dashboard from '../resources/dashboard';
 import Transaction from '../resources/transaction';
+import Details from '../resources/details';
 
 class Routes extends Component {
     render() {
@@ -17,6 +18,7 @@ class Routes extends Component {
                         <Switch>
                             <Route exact path="/" component={Dashboard} />
                             <Route path="/transaction" component={Transaction} />
+                            <Route path="/transaction-details/:id" component={Details} />
                         </Switch>
                         <Footer />
                     </div>

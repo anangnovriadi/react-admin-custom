@@ -1,19 +1,42 @@
 import React, { Component } from 'react';
 import Sidebar from '../../layout/Sidebar';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Wrapper extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
-            list: []
+            list: [],
+            open: false
         }
+
+        this.onOpenModal = this.onOpenModal.bind(this);
+        this.onCloseModal = this.onCloseModal.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    onOpenModal = () => {
+        this.setState({ open: true });
+    }
+    
+    onCloseModal = () => {
+        this.setState({ open: false });
+    }
+
+    componentWillMount() {
+        axios.post('http://18.219.201.200:8080/api/get-all-receipt', {}, 
+        { headers: 
+            { 
+                'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NDUxMjI3MDQsImlkIjoiMSJ9.AGl81BGTXpAgsVrhYystc_v3x_RzFx8WFjO45xv3bJs' 
+            } 
+        })
         .then((res) => {
+            this.setState({
+                list: res.data.data
+            })
             console.log(res.data)
         })
         .catch((err) => {
@@ -21,7 +44,17 @@ class Wrapper extends Component {
         })
     }
 
+    handleClick() {
+
+    }
+
+    handleSubmit() {
+
+    }
+
     render() {
+        const { open, list } = this.state;
+        const { onCloseModal, onOpenModal } = this;
         return(
             <div>
                 <Sidebar link="/transaction" />
@@ -40,35 +73,60 @@ class Wrapper extends Component {
                             <table id="datatable1" className="table display responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th className="wd-15p">First name</th>
-                                        <th className="wd-15p">Last name</th>
-                                        <th className="wd-20p">Position</th>
-                                        <th className="wd-15p">Start date</th>
-                                        <th className="wd-10p">Salary</th>
-                                        <th className="wd-25p">E-mail</th>
+                                        <th className="wd-15p">Id Transaksi</th>
+                                        <th className="wd-15p">Nama Bank</th>
+                                        <th className="wd-20p">Akun Bank</th>
+                                        <th className="wd-20p">Total Harga</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger</td>
-                                        <td>Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                        <td>t.nixon@datatables.net</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tiger</td>
-                                        <td>Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                        <td>t.nixon@datatables.net</td>
-                                    </tr>
+                                    {
+                                        list.map((key, i) => {
+                                            return(
+                                                <tr key={i} style={{ cursor: 'pointer' }} onClick={onOpenModal}>
+                                                    <Link to={"/transaction-details/"+key.Receipt.ID}>
+                                                        <td style={{ fontWeight: 'bold' }}>{key.Receipt.Id_transaction}</td>
+                                                    </Link>
+                                                    <td>{key.Receipt.BankName}</td>
+                                                    <td>{key.Receipt.AccountBankName}</td>
+                                                    <td>{key.Transaction.Total_prize}</td>
+                                                    <td>{key.Transaction.Status === '2' ? 'Sudah Konfirmasi' : 'Belum Konfirmasi'}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    {/* <Modal open={open} onClose={onCloseModal} center>
+                        <div className="pt-4 pb-4">
+                            <h2>Detail Transaksi</h2>
+                        </div>
+                        <div className="text-center pb-4">
+                            <img src={key.Receipt.Image} />
+                        </div>
+                        <div className="text-center">
+                            <p>
+                                {key.Receipt.BankName}
+                            </p>
+                            <p>
+                                {key.Receipt.AccountBankName}
+                            </p>
+                            <p>
+                                {key.Transaction.Total_prize}
+                            </p>
+                        </div>
+                        <div className="d-flex float-right">
+                            <div className="">
+                                <button className="btn btn-secondary">Yes</button>
+                            </div>
+                            <div className="">
+                                <button className="btn btn-primary">No</button>
+                            </div>
+                        </div>
+                    </Modal> */}
                 </div>
             </div>
         );
