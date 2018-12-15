@@ -73,25 +73,29 @@ class Wrapper extends Component {
                             <table id="datatable1" className="table display responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th className="wd-15p">Id Transaksi</th>
-                                        <th className="wd-15p">Nama Bank</th>
-                                        <th className="wd-20p">Akun Bank</th>
-                                        <th className="wd-20p">Total Harga</th>
-                                        <th>Status</th>
+                                        <th className="wd-10p text-center">Id Transaksi</th>
+                                        <th className="wd-15p text-center">Nama Bank</th>
+                                        <th className="wd-20p text-center">Akun Bank</th>
+                                        <th className="wd-20p text-center">Total Harga</th>
+                                        <th className="text-center">Status</th>
+                                        <th className="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
                                         list.map((key, i) => {
                                             return(
-                                                <tr key={i} style={{ cursor: 'pointer' }} onClick={onOpenModal}>
-                                                    <Link to={"/transaction-details/"+key.Receipt.ID}>
-                                                        <td style={{ fontWeight: 'bold' }}>{key.Receipt.Id_transaction}</td>
-                                                    </Link>
-                                                    <td>{key.Receipt.BankName}</td>
-                                                    <td>{key.Receipt.AccountBankName}</td>
-                                                    <td>{key.Transaction.Total_prize}</td>
-                                                    <td>{key.Transaction.Status === '2' ? 'Sudah Konfirmasi' : 'Belum Konfirmasi'}</td>
+                                                <tr key={i} style={{ cursor: 'pointer' }}>
+                                                    <td className="text-center" style={{ fontWeight: 'bold' }}>{key.Receipt.Id_transaction}</td>
+                                                    <td className="text-center">{key.Receipt.BankName}</td>
+                                                    <td className="text-center">{key.Receipt.AccountBankName}</td>
+                                                    <td className="text-center">{key.Transaction.Total_prize}</td>
+                                                    <td className="text-center">{key.Transaction.Status === '2' ? 'Sudah Konfirmasi' : 'Belum Konfirmasi'}</td>
+                                                    <td className="text-center">
+                                                        <Link to={"/transaction-details/"+key.Receipt.ID}>
+                                                            <button style={{ cursor: 'pointer' }} className="btn btn-primary">Update</button>
+                                                        </Link>
+                                                    </td>
                                                 </tr>
                                             )
                                         })
@@ -100,33 +104,6 @@ class Wrapper extends Component {
                             </table>
                         </div>
                     </div>
-                    {/* <Modal open={open} onClose={onCloseModal} center>
-                        <div className="pt-4 pb-4">
-                            <h2>Detail Transaksi</h2>
-                        </div>
-                        <div className="text-center pb-4">
-                            <img src={key.Receipt.Image} />
-                        </div>
-                        <div className="text-center">
-                            <p>
-                                {key.Receipt.BankName}
-                            </p>
-                            <p>
-                                {key.Receipt.AccountBankName}
-                            </p>
-                            <p>
-                                {key.Transaction.Total_prize}
-                            </p>
-                        </div>
-                        <div className="d-flex float-right">
-                            <div className="">
-                                <button className="btn btn-secondary">Yes</button>
-                            </div>
-                            <div className="">
-                                <button className="btn btn-primary">No</button>
-                            </div>
-                        </div>
-                    </Modal> */}
                 </div>
             </div>
         );

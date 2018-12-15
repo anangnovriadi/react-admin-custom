@@ -5,6 +5,7 @@ import Header from '../resources/layout/Header';
 import Footer from '../resources/layout/Footer';
 import Dashboard from '../resources/dashboard';
 import Transaction from '../resources/transaction';
+import MustBePaid from '../resources/mustbepaid';
 import Details from '../resources/details';
 
 class Routes extends Component {
@@ -18,6 +19,7 @@ class Routes extends Component {
                         <Switch>
                             <Route exact path="/" component={Dashboard} />
                             <Route path="/transaction" component={Transaction} />
+                            <Route path="/must-be-paid" component={MustBePaid} />
                             <Route path="/transaction-details/:id" component={Details} />
                         </Switch>
                         <Footer />

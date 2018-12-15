@@ -24,7 +24,13 @@ class Sidebar extends Component {
                         <Link to="/transaction" className={this.props.link === '/transaction' ? 'sl-menu-link active' : 'sl-menu-link'}>
                             <div className="sl-menu-item">
                                 <i className="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-                                <span className="menu-item-label">Transaksi</span>
+                                <span className="menu-item-label">Transaction</span>
+                            </div>
+                        </Link>
+                        <Link to="/must-be-paid" className={this.props.link === '/must-be-paid' ? 'sl-menu-link active' : 'sl-menu-link'}>
+                            <div className="sl-menu-item">
+                                <i className="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+                                <span className="menu-item-label">Must Be Paid</span>
                             </div>
                         </Link>
                     </div>
