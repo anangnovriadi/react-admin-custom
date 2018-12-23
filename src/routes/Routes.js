@@ -7,10 +7,25 @@ import Dashboard from "../resources/dashboard";
 import Transaction from "../resources/transaction";
 import MustBePaid from "../resources/mustbepaid";
 import Details from "../resources/details";
+import DetailService from "../resources/detailService";
+import Login from "../resources/auth/components/Wrapper";
+import { createBrowserHistory } from "history";
+import Service from "../resources/service";
+import AuthRoute from "./AuthRoute";
+
+const history = createBrowserHistory();
 
 class Routes extends Component {
   render() {
-    return (
+    return history.location.pathname === "/login" ? (
+      <Router>
+        <div>
+          <Switch>
+            <Route path="/login" component={Login} />
+          </Switch>
+        </div>
+      </Router>
+    ) : (
       <Router>
         <div>
           <Sidebar />
@@ -21,6 +36,8 @@ class Routes extends Component {
               <Route exact path="/" component={Transaction} />
               <Route path="/must-be-paid" component={MustBePaid} />
               <Route path="/transaction-details/:id" component={Details} />
+              <Route path="/service" component={Service} />
+              <Route path="/service-details/:id" component={DetailService} />
             </Switch>
             <Footer />
           </div>

@@ -22,7 +22,7 @@ class Wrapper extends Component {
   componentWillMount() {
     let params = this.props.match.params.id;
     axios
-      .get("http://18.219.201.200:8080/api/getreceipt/" + params)
+      .get("http://18.219.201.200:8080/api/getservice/" + params)
       .then(res => {
         this.setState({
           list: res.data.data
@@ -38,15 +38,15 @@ class Wrapper extends Component {
     e.preventDefault();
     let params = this.props.match.params.id;
     axios
-      .get("http://18.219.201.200:8080/api/update-receipt/" + params)
+      .get("http://18.219.201.200:8080/api/update-services-status/" + params)
       .then(res => {
         swal({
           title: "Success",
-          text: "Success Update Transaksi",
+          text: "Success Update Service",
           icon: "success",
           buttons: false
         });
-        setTimeout(() => history.push("/"), 1000);
+        setTimeout(() => history.push("/service"), 1000);
       })
       .catch(err => {
         console.log(err);
@@ -57,19 +57,19 @@ class Wrapper extends Component {
     const { list } = this.state;
     return (
       <div>
-        <Sidebar link="/" />
+        <Sidebar link="/service" />
         <nav className="breadcrumb sl-breadcrumb">
           <a className="breadcrumb-item" href="index.html">
             Starlight
           </a>
-          <span className="breadcrumb-item active">Transaction</span>
+          <span className="breadcrumb-item active">Service</span>
         </nav>
         <div className="sl-pagebody">
           <div className="sl-page-title">
             <h5>Data Table</h5>
           </div>
           <div className="card pd-20 pd-sm-40">
-            <h6 className="card-body-title">Detils Data Transaction</h6>
+            <h6 className="card-body-title">Detils Data Service</h6>
             <p className="mg-b-20 mg-sm-b-20" />
             <div className="table-wrapper">
               <form>
