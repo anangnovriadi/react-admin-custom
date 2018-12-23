@@ -3,6 +3,7 @@ import Sidebar from "../../layout/Sidebar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+import { isAuth } from "../../../helpers/authentication";
 
 class Wrapper extends Component {
   constructor(props) {
@@ -21,8 +22,7 @@ class Wrapper extends Component {
         {},
         {
           headers: {
-            Authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NDU4MTM2MzgsImlkIjoiNCJ9.NBt1jN71lDL0Iy5RxAOZsj6KBxw7uu2GdSDlxkYxmbE"
+            Authorization: isAuth()
           }
         }
       )
