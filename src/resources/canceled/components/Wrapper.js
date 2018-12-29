@@ -158,7 +158,6 @@ class Wrapper extends Component {
                                             </button>
                                           </div>
                                         </div>
-                                        
                                     </td>
                                 </tr>
                             )

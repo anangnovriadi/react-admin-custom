@@ -3,6 +3,11 @@ import Sidebar from '../../layout/Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { url } from '../../../helpers/url';
+import { isAuth } from "../../../helpers/authentication";
+import swal from "sweetalert";
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory({ forceRefresh: true });
 
 class Wrapper extends Component {
     constructor(props) {
@@ -25,6 +30,33 @@ class Wrapper extends Component {
             console.log(err)
         })
     }
+
+    handleClick(id) {
+        let formData = new FormData();
+        formData.append("id_schedule", id);
+
+         axios
+          .post(url+"/update-allready-paid",
+            formData,
+            {
+              headers: {
+                Authorization: isAuth()
+              }
+            }
+          )
+          .then(res => {
+            swal({
+              title: "Success",
+              text: "Success",
+              icon: "success",
+              buttons: false
+            });
+            setTimeout(() => history.push("/must-be-paid"), 1000);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
 
     render() {
         const { list } = this.state;
@@ -50,10 +82,14 @@ class Wrapper extends Component {
                                         <th className="wd-10p text-center">Nama Bank</th>
                                         <th className="wd-10p text-center">Atas Nama</th>
                                         <th className="wd-15p text-center">No Reg</th>
+                                        <th className="wd-15p text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
+                                        list === null ? (
+                                          <div style={{padding: '2px'}}>Kosong</div>
+                                        ) : 
                                         list.map((key, i) => {
                                             return(
                                                 <tr key={i} style={{ cursor: 'pointer' }}>
@@ -61,6 +97,15 @@ class Wrapper extends Component {
                                                     <td className="text-center" style={{ fontWeight: 'bold' }}>{key.BankDetail.BankName}</td>
                                                     <td className="text-center">{key.BankDetail.AccountName}</td>
                                                     <td className="text-center">{key.BankDetail.Norek}</td>
+                                                    <td className="text-center">
+                                                        <button
+                                                          onClick={() => this.handleClick(key.Schedule.ID)}
+                                                          style={{ cursor: "pointer" }}
+                                                          className="btn btn-secondary"
+                                                        >
+                                                        Done
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             )
                                         })
