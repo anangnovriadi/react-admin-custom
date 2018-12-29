@@ -27,10 +27,14 @@ class Wrapper extends Component {
         }
       )
       .then(res => {
-        this.setState({
-          list: res.data.data
-        });
-        console.log(res.data);
+        if (res.data.status == "success") {
+          this.setState({
+            list: res.data.data
+          });
+        } else {
+          localStorage.clear();
+          history.push("/");
+        }
       })
       .catch(err => {
         console.log(err);

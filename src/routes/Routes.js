@@ -17,31 +17,31 @@ const history = createBrowserHistory();
 
 class Routes extends Component {
   render() {
-    return history.location.pathname === "/login" ? (
+    return (
       <Router>
-        <div>
-          <Switch>
-            <Route path="/login" component={Login} />
-          </Switch>
-        </div>
-      </Router>
-    ) : (
-      <Router>
-        <div>
-          <Sidebar />
-          <Header />
-          <div className="sl-mainpanel">
+        {history.location.pathname === "/login" ? (
+          <div>
             <Switch>
-              {/* <Route exact path="/" component={Dashboard} /> */}
-              <Route exact path="/" component={Transaction} />
-              <Route path="/must-be-paid" component={MustBePaid} />
-              <Route path="/transaction-details/:id" component={Details} />
-              <Route path="/service" component={Service} />
-              <Route path="/service-details/:id" component={DetailService} />
+              <Route exact path="/login" component={Login} />
             </Switch>
-            <Footer />
           </div>
-        </div>
+        ) : (
+          <div>
+            <Sidebar />
+            <Header />
+            <div className="sl-mainpanel">
+              <Switch>
+                {/* <Route exact path="/" component={Dashboard} /> */}
+                <AuthRoute exact path="/" component={Transaction} />
+                <Route path="/must-be-paid" component={MustBePaid} />
+                <Route path="/transaction-details/:id" component={Details} />
+                <Route path="/service" component={Service} />
+                <Route path="/service-details/:id" component={DetailService} />
+              </Switch>
+              <Footer />
+            </div>
+          </div>
+        )}
       </Router>
     );
   }

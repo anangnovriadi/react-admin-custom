@@ -45,7 +45,7 @@ class Wrapper extends Component {
           show: "block",
           textAlert: "Success"
         });
-        setTimeout(() => history.push("/"), 500);
+        setTimeout(() => history.push("/"), 400);
       })
       .catch(err => {
         this.setState({
