@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { isAuth } from "../../../helpers/authentication";
+import { url } from '../../../helpers/url';
 
 class Wrapper extends Component {
   constructor(props) {
@@ -17,8 +18,7 @@ class Wrapper extends Component {
 
   componentWillMount() {
     axios
-      .post(
-        "http://18.219.201.200:8080/api/getallservices",
+      .post(url+"/getallservices",
         {},
         {
           headers: {
@@ -30,7 +30,6 @@ class Wrapper extends Component {
         this.setState({
           list: res.data.data
         });
-        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -38,7 +37,6 @@ class Wrapper extends Component {
   }
 
   render() {
-    console.log(this.props.match);
     const { list } = this.state;
     return (
       <div>
@@ -88,7 +86,12 @@ class Wrapper extends Component {
                         <td className="text-center">{key.Salary}</td>
                         <td className="text-center">{key.Educational_Level}</td>
                         <td className="text-center">{key.Verification}</td>
-                        <td className="text-center">{key.Experiance}</td>
+                        {key.Experiance === '' ? (
+                            <td className="text-center">Belum ada pengalaman</td>
+                          ) : (
+                            <td className="text-center">{key.Experiance} tahun</td>
+                          )
+                        }
                         <td className="text-center">
                           <Link to={"/service-details/" + key.ID}>
                             <button

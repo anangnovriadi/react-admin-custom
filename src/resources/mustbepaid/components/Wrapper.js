@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Sidebar from '../../layout/Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { url } from '../../../helpers/url';
 
 class Wrapper extends Component {
     constructor(props) {
@@ -14,12 +15,11 @@ class Wrapper extends Component {
     }
 
     componentWillMount() {
-        axios.get('http://18.219.201.200:8080/api/get-paid-schedule')
+        axios.get(url+'/get-paid-schedule')
         .then((res) => {
             this.setState({
                 list: res.data.data
             })
-            console.log(res.data)
         })
         .catch((err) => {
             console.log(err)
@@ -46,9 +46,10 @@ class Wrapper extends Component {
                             <table id="datatable1" className="table display responsive nowrap">
                                 <thead>
                                     <tr>
+                                        <th className="wd-15p text-center">Id Transaksi</th>
                                         <th className="wd-10p text-center">Nama Bank</th>
-                                        <th className="wd-10p text-center">Account Bank</th>
-                                        <th className="wd-15p text-center">Id Schedulle</th>
+                                        <th className="wd-10p text-center">Atas Nama</th>
+                                        <th className="wd-15p text-center">No Reg</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,9 +57,10 @@ class Wrapper extends Component {
                                         list.map((key, i) => {
                                             return(
                                                 <tr key={i} style={{ cursor: 'pointer' }}>
-                                                    <td className="text-center" style={{ fontWeight: 'bold' }}>Bank BCA</td>
-                                                    <td className="text-center">BCA</td>
-                                                    <td className="text-center">{key.ID}</td>
+                                                    <td className="text-center">{key.Transaction.ID}</td>
+                                                    <td className="text-center" style={{ fontWeight: 'bold' }}>{key.BankDetail.BankName}</td>
+                                                    <td className="text-center">{key.BankDetail.AccountName}</td>
+                                                    <td className="text-center">{key.BankDetail.Norek}</td>
                                                 </tr>
                                             )
                                         })

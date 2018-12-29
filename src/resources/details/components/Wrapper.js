@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import swal from "sweetalert";
 import _ from "lodash";
+import { url } from '../../../helpers/url';
 
 const history = createBrowserHistory({ forceRefresh: true });
 
@@ -22,7 +23,7 @@ class Wrapper extends Component {
   componentWillMount() {
     let params = this.props.match.params.id;
     axios
-      .get("http://18.219.201.200:8080/api/getreceipt/" + params)
+      .get(url+"/getreceipt/" + params)
       .then(res => {
         this.setState({
           list: res.data.data

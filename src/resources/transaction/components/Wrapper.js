@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { isAuth } from "../../../helpers/authentication";
+import { url } from '../../../helpers/url';
+
 
 class Wrapper extends Component {
   constructor(props) {
@@ -17,8 +19,7 @@ class Wrapper extends Component {
 
   componentWillMount() {
     axios
-      .post(
-        "http://18.219.201.200:8080/api/get-all-receipt",
+      .post(url+"/get-all-receipt",
         {},
         {
           headers: {
@@ -31,6 +32,7 @@ class Wrapper extends Component {
           this.setState({
             list: res.data.data
           });
+          console.log(this.state)
         } else {
           localStorage.clear();
           history.push("/");
@@ -42,7 +44,6 @@ class Wrapper extends Component {
   }
 
   render() {
-    console.log(this.props.match);
     const { list } = this.state;
     return (
       <div>
@@ -55,7 +56,7 @@ class Wrapper extends Component {
         </nav>
         <div className="sl-pagebody">
           <div className="sl-page-title">
-            <h5>Data Table</h5>
+            <h5>Update Data</h5>
           </div>
           <div className="card pd-20 pd-sm-40">
             <h6 className="card-body-title">All Data Transaction</h6>

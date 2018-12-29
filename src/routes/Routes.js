@@ -11,6 +11,7 @@ import DetailService from "../resources/detailService";
 import Login from "../resources/auth/components/Wrapper";
 import { createBrowserHistory } from "history";
 import Service from "../resources/service";
+import Canceled from "../resources/canceled";
 import AuthRoute from "./AuthRoute";
 
 const history = createBrowserHistory();
@@ -37,6 +38,7 @@ class Routes extends Component {
                 <Route path="/transaction-details/:id" component={Details} />
                 <Route path="/service" component={Service} />
                 <Route path="/service-details/:id" component={DetailService} />
+                <Route path="/canceled" component={Canceled} />
               </Switch>
               <Footer />
             </div>

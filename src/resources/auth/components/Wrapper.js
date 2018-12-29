@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { createBrowserHistory } from "history";
+import { url } from '../../../helpers/url';
 
 const history = createBrowserHistory({ forceRefresh: true });
 
@@ -38,7 +39,7 @@ class Wrapper extends Component {
     };
 
     axios
-      .post("http://18.219.201.200:8080/api/login", formData, axiosConfig)
+      .post(url+"/login", formData, axiosConfig)
       .then(res => {
         localStorage.setItem("token", res.data.token);
         this.setState({

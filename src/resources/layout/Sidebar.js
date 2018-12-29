@@ -18,11 +18,11 @@ class Sidebar extends Component {
           <label className="sidebar-label">Navigation</label>
           <div className="sl-sideleft-menu">
             {/* <Link to="/" className={this.props.link === '/' ? 'sl-menu-link active' : 'sl-menu-link'}>
-                            <div className="sl-menu-item">
-                                <i className="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-                                <span className="menu-item-label">Dashboard</span>
-                            </div>
-                        </Link> */}
+                <div className="sl-menu-item">
+                    <i className="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+                    <span className="menu-item-label">Dashboard</span>
+                </div>
+            </Link> */}
             <Link
               to="/"
               className={
@@ -58,6 +58,19 @@ class Sidebar extends Component {
               <div className="sl-menu-item">
                 <i className="menu-item-icon icon ion-ios-photos-outline tx-20" />
                 <span className="menu-item-label">Service</span>
+              </div>
+            </Link>
+            <Link
+              to="/canceled"
+              className={
+                this.props.link === "/canceled"
+                  ? "sl-menu-link active"
+                  : "sl-menu-link"
+              }
+            >
+              <div className="sl-menu-item">
+                <i className="menu-item-icon icon ion-ios-photos-outline tx-20" />
+                <span className="menu-item-label">Canceled</span>
               </div>
             </Link>
           </div>
