@@ -43,7 +43,7 @@ class Wrapper extends Component {
 
     formData.append('id_receipt', params);
     axios
-      .post("http://18.219.201.200:8080/api/update-receipt/", 
+      .post(url + "/update-receipt/", 
       formData,
         {
           headers: {

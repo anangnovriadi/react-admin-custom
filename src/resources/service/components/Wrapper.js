@@ -30,6 +30,8 @@ class Wrapper extends Component {
         this.setState({
           list: res.data.data
         });
+
+        console.log(this.state)
       })
       .catch(err => {
         console.log(err);
@@ -93,14 +95,25 @@ class Wrapper extends Component {
                           )
                         }
                         <td className="text-center">
-                          <Link to={"/service-details/" + key.ID}>
-                            <button
-                              style={{ cursor: "pointer" }}
-                              className="btn btn-primary"
-                            >
-                              Update
-                            </button>
-                          </Link>
+                          {
+                            key.Verification === 'verified' ? (
+                              <button
+                                style={{ cursor: "pointer" }}
+                                className="btn btn-secondary"
+                              >
+                                Done
+                              </button>
+                            ) : (
+                              <Link to={"/service-details/" + key.ID}>
+                                <button
+                                  style={{ cursor: "pointer" }}
+                                  className="btn btn-primary"
+                                >
+                                  Update
+                                </button>
+                              </Link>
+                            )
+                          }
                         </td>
                       </tr>
                     );

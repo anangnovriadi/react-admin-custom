@@ -6,6 +6,7 @@ import { createBrowserHistory } from "history";
 import swal from "sweetalert";
 import _ from "lodash";
 import { url } from '../../../helpers/url';
+import { isAuth } from "../../../helpers/authentication";
 
 const history = createBrowserHistory({ forceRefresh: true });
 
@@ -23,12 +24,16 @@ class Wrapper extends Component {
   componentWillMount() {
     let params = this.props.match.params.id;
     axios
-      .get(url+"/getservice/" + params)
+      .get(url+"/getservices/" + params, {
+        headers: {
+          Authorization: isAuth()
+        }
+      })
       .then(res => {
         this.setState({
           list: res.data.data
         });
-        console.log(res.data);
+        console.log(this.state);
       })
       .catch(err => {
         console.log(err);
@@ -39,7 +44,7 @@ class Wrapper extends Component {
     e.preventDefault();
     let params = this.props.match.params.id;
     axios
-      .get("http://18.219.201.200:8080/api/update-services-status/" + params)
+      .get(url + "/update-services-status/" + params)
       .then(res => {
         swal({
           title: "Success",
@@ -47,6 +52,7 @@ class Wrapper extends Component {
           icon: "success",
           buttons: false
         });
+        console.log(res)
         setTimeout(() => history.push("/service"), 1000);
       })
       .catch(err => {
@@ -71,29 +77,21 @@ class Wrapper extends Component {
           </div>
           <div className="card pd-20 pd-sm-40">
             <h6 className="card-body-title">Detils Data Service</h6>
-            <p className="mg-b-20 mg-sm-b-20" />
             <div className="table-wrapper">
-              <form>
-                {list.map((key, i) => {
-                  return (
-                    <div key={i}>
-                      <img style={{ width: "100%" }} src={key.Receipt.Image} />
-                      <ul className="pt-4">
-                        <li>{key.Receipt.AccountBankName}</li>
-                        <li>{key.Receipt.BankName}</li>
-                        <li>{key.Transaction.Total_prize}</li>
-                      </ul>
-                    </div>
-                  );
-                })}
-                <button
-                  className="btn btn-secondary"
-                  onClick={this.handleClick}
-                  type="submit"
-                >
-                  Update
-                </button>
-              </form>
+              <img style={{ width: "100%" }} src={list.Image} />              
+              <div className="pt-2 pb-4">
+                <li>{list.Title}</li>
+                <li>{list.Description}</li>
+                <li>{list.Educational_Level}</li>
+                <li>{list.Nama}</li>
+              </div>
+              <button
+                className="btn btn-secondary"
+                onClick={this.handleClick}
+                type="submit"
+              >
+                Update
+              </button>
             </div>
           </div>
         </div>
