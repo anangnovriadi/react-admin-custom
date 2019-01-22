@@ -6,6 +6,7 @@ import { createBrowserHistory } from "history";
 import swal from "sweetalert";
 import _ from "lodash";
 import { url } from '../../../helpers/url';
+import { isAuth } from "../../../helpers/authentication";
 
 const history = createBrowserHistory({ forceRefresh: true });
 
@@ -38,8 +39,17 @@ class Wrapper extends Component {
   handleClick(e) {
     e.preventDefault();
     let params = this.props.match.params.id;
+    let formData = new FormData();
+
+    formData.append('id_receipt', params);
     axios
-      .get("http://18.219.201.200:8080/api/update-receipt/" + params)
+      .post("http://18.219.201.200:8080/api/update-receipt/", 
+      formData,
+        {
+          headers: {
+            Authorization: isAuth()
+        }
+      })
       .then(res => {
         swal({
           title: "Success",
@@ -47,6 +57,7 @@ class Wrapper extends Component {
           icon: "success",
           buttons: false
         });
+        console.log(res)
         setTimeout(() => history.push("/"), 1000);
       })
       .catch(err => {
